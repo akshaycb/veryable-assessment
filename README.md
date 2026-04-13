@@ -4,6 +4,8 @@
 
 This challenge assesses your proficiency in **React** and **Next.js**, including concepts like **API calls** and handling **loading** and **error states**.
 
+Finished!
+
 ---
 
 ### **Problem Statement**
