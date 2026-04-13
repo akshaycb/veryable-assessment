@@ -69,11 +69,11 @@ export default function Home() {
     }
   };
 
-  const filteredOps = ops.filter(op => {
-    const query = searchQuery.toLowerCase();
-    return (op.opTitle?.toLowerCase().includes(query) ?? false) ||
-           (op.publicId?.toLowerCase().includes(query) ?? false) ||
-           op.operators.some(operator => `${operator.firstName} ${operator.lastName}`.toLowerCase().includes(query));
+  const filteredOps = ops?.filter(op => {
+    const query = searchQuery?.toLowerCase();
+    return (op?.opTitle?.toLowerCase()?.includes(query) ?? false) ||
+           (op?.publicId?.toLowerCase()?.includes(query) ?? false) ||
+           op?.operators?.some?.(operator => `${operator?.firstName} ${operator?.lastName}`.toLowerCase().includes(query));
   });
 
   return (
@@ -91,17 +91,17 @@ export default function Home() {
         const sortedOperators = [...op.operators].sort((a, b) => {
           let aVal: string | number, bVal: string | number;
           if (sortField === 'firstName') {
-            aVal = a.firstName;
-            bVal = b.firstName;
+            aVal = a?.firstName || '';
+            bVal = b?.firstName || '';
           } else if (sortField === 'lastName') {
-            aVal = a.lastName;
-            bVal = b.lastName;
+            aVal = a?.lastName || '';
+            bVal = b?.lastName || '';
           } else if (sortField === 'opsCompleted') {
-            aVal = a.opsCompleted;
-            bVal = b.opsCompleted;
+            aVal = a?.opsCompleted ?? 0;
+            bVal = b?.opsCompleted ?? 0;
           } else {
-            aVal = a.reliability;
-            bVal = b.reliability;
+            aVal = a?.reliability ?? 0;
+            bVal = b?.reliability ?? 0;
           }
           if (sortDirection === 'asc') {
             return aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
@@ -111,11 +111,11 @@ export default function Home() {
         });
         return (
         <Box key={opIndex} sx={{ mb: 4 }}>
-          <Typography variant="h6">{op.opTitle || 'No Title'}</Typography>
-          <Typography>Public ID: {op.publicId || 'N/A'}</Typography>
+          <Typography variant="h6">{op?.opTitle || 'No Title'}</Typography>
+          <Typography>Public ID: {op?.publicId || 'N/A'}</Typography>
           <Typography>Operators Needed: {op.operatorsNeeded || 'N/A'}</Typography>
-          <Typography>Start Time: {op.startTime ? new Date(op.startTime).toLocaleDateString() : 'N/A'}</Typography>
-          <Typography>End Time: {op.endTime ? new Date(op.endTime).toLocaleDateString() : 'N/A'}</Typography>
+          <Typography>Start Time: {op?.startTime ? new Date(op?.startTime).toLocaleDateString() : 'N/A'}</Typography>
+          <Typography>End Time: {op?.endTime ? new Date(op?.endTime).toLocaleDateString() : 'N/A'}</Typography>
           <TableContainer component={Paper} sx={{ mt: 2 }}>
             <Table>
               <TableHead>
@@ -185,7 +185,7 @@ export default function Home() {
                         size="small"
                         sx={{ ml: 1 }}
                         onClick={() => handleCheckOut(opIndex, operatorIndex)}
-                        disabled={!checkData.checkIn || !!checkData.checkOut}
+                        disabled={!checkData?.checkIn || !!checkData.checkOut}
                       >
                         Check Out
                       </Button>
